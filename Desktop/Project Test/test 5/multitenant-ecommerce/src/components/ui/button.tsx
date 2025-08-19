@@ -20,10 +20,10 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
-        elevated:" bg-white hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-treanslate-y-[4px] transition-all",
+        elevated:" bg-white hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-treanslate-x-[4px] hover:-treanslate-y-[4px] transition-all",
       },
       size: {
-        default: "<h-12></h-12> px-4 py-2 has-[>svg]:px-3",
+        default: "h-12 px-4 py-2 has-[>svg]:px-3",
         sm: "h-10 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-12 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
