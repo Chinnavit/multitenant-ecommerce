@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 import { Category } from "@/payload-types";
-import { CustomCategory } from "../types";
+import { CategoriesGetManyOutput } from "@/modules/categories/type";
 
 interface Props {
-    category: CustomCategory; //TODO :Change this
+    category: CategoriesGetManyOutput[1]
     isOpen:boolean;
     position:{ top: number; left: number};
 }
@@ -40,7 +40,7 @@ export const SubcategoryMenu = ({
                         <Link 
                             key={subcategory.slug} 
                             href={`/${category.slug}/${subcategory.slug}`}
-                            className="w-full text-left p-4  hover:bg-black hover:text-white flex justify-between items-center underline font-medium"
+                            className="w-full text-left p-4 hover:bg-black hover:text-white flex justify-between items-center underline font-medium"
                         >
                         {subcategory.name}
                         </Link>

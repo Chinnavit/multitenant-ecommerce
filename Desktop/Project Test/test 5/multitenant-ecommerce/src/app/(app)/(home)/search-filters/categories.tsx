@@ -6,13 +6,15 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
+import { CategoriesGetManyOutput } from "@/modules/categories/type";
+
 import { CategoryDropdown } from "./category-dropdown";
 import { CategoriesSidebar } from "./categories-sidebar";
-import { CustomCategory } from "../types";
+
 
 
 interface Props {
-    data: CustomCategory;
+    data: CategoriesGetManyOutput
 };
 
 export const Categories = ({ data }: Props) => {
@@ -26,15 +28,15 @@ export const Categories = ({ data }: Props) => {
 
     const activeCategory = "all";
 
-    const activeCategoryIndex = data.findIndex((cat) => cat.slug ===  activeCategory);
-    const isActiveCategoryHidden = activeCategoryIndex >= visibleCount && activeCategoryIndex !== -1;
+    const activeCategoryIndex = data.findIndex((cat) => cat.slug === activeCategory);
+    const isActiveCategoryHidden = activeCategoryIndex >= visibleCount && activeCategoryIndex !== -1; 
 
     useEffect(() => {
         const calculateVisible = () => {
             if (!containerRef.current || !measureRef.current || !viewAllRef.current) return;
             
             const containerWidth = containerRef.current.offsetWidth;
-            const viewAllWidth =  viewAllRef.current.offsetWidth;
+            const viewAllWidth = viewAllRef.current.offsetWidth;
             const availableWidth = containerWidth - viewAllWidth;
 
             const items = Array.from(measureRef.current.children);
@@ -48,7 +50,7 @@ export const Categories = ({ data }: Props) => {
                 totalWidth += width;
                 visible++;
             }
-
+            
             setVisibleCount(visible);
         };
 
@@ -62,24 +64,24 @@ export const Categories = ({ data }: Props) => {
     return (
         <div className="relative w-full">
             {/* Categories sidebar */}
-            <CategoriesSidebar open={ isSidebarOpen } onOpenChange={setIsSidebarOpen} data={data}/>
+            <CategoriesSidebar open={ isSidebarOpen } onOpenChange={setIsSidebarOpen} />
 
 
             {/* Hidden div to  measure all items */}
             <div
                 ref={measureRef}
                 className="absolute opacity-0 pointer-events-none flex"
-                style={{ position:"flex", top: -9999, left: -9999}}
+                style={{ position: "fixed", top: -9999, left: -9999}}
             >
 
                 {data.map((category) => (
-                        <div key={category.id}>
-                            <CategoryDropdown
+                    <div key={category.id}>
+                        <CategoryDropdown
                             category={category}
                             isActive={activeCategory === category.slug}
                             isNavigationHovered={false}
                         />
-                    </div>
+                    </div> 
                 ))}
             </div>
 

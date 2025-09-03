@@ -1,20 +1,19 @@
 "use client";
 
-
+import { Link } from "lucide-react";
 import { useRef, useState } from "react";
-
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
+import { CategoriesGetManyOutput } from "@/modules/categories/type";
+
 import { SubcategoryMenu } from "./subcategory-menu"
 import { useDropdownPosition } from "./use-dropdown-position";
-import { CustomCategory } from "../types";
-import { Link } from "lucide-react";
  
 
 interface Props {
-    category: CustomCategory;
+    category: CategoriesGetManyOutput[1];
     isActive?: boolean;
     isNavigationHovered?: boolean;
 };
