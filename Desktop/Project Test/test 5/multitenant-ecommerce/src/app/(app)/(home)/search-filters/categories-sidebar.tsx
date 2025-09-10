@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
+import { useTRPC } from "@/trpc/client";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import{
     Sheet,
@@ -11,7 +12,6 @@ import{
     SheetTitle,
 } from "@/components/ui/sheet";
 
-import { useTRPC } from "@/trpc/client";
 import { CategoriesGetManyOutput } from "@/modules/categories/type";
 
 interface Props {

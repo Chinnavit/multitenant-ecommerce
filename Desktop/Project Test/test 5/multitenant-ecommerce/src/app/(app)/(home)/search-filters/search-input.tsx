@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { CategoriesSidebar } from "./categories-sidebar";
-import { CustomCategory } from "../types";
 
 interface Props {
     disabled?: boolean;
@@ -19,7 +18,7 @@ export const SearchInput = ({
 
 }: Props) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+    
     return (
         <div className="flex items-center gap-2 w-full">
             <CategoriesSidebar open={isSidebarOpen} onOpenChange={setIsSidebarOpen}/>

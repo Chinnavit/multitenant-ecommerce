@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Category } from "@/payload-types";
+
 import { CategoriesGetManyOutput } from "@/modules/categories/type";
 
 interface Props {
@@ -13,6 +14,7 @@ export const SubcategoryMenu = ({
     category,
     isOpen,
     position,
+    
 }: Props) => {
     if(!isOpen || !category.subcategories || category.subcategories.length === 0){
         return null;

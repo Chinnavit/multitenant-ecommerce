@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "lucide-react";
+
 import { useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -10,6 +10,7 @@ import { CategoriesGetManyOutput } from "@/modules/categories/type";
 
 import { SubcategoryMenu } from "./subcategory-menu"
 import { useDropdownPosition } from "./use-dropdown-position";
+import Link from "next/link";
  
 
 interface Props {

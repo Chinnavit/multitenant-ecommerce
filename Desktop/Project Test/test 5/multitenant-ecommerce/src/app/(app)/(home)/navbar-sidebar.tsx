@@ -6,7 +6,6 @@ import {
     SheetTitle,
 } from "@/components/ui/sheet";
 import { ScrollArea }  from "@/components/ui/scroll-area"; 
-import { Scroll } from "lucide-react";
 
 interface NavbarItem {
     href: string;
