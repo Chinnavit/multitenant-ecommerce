@@ -6,11 +6,11 @@ import { toast } from "sonner";
 import { Poppins  } from "next/font/google";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { cn } from "@/lib/utils";
-import { useTRPC } from "@/trpc/client";
+//import { useTRPC } from "@/trpc/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/form";
 
 import { loginSchema } from "../../schemas";
+import { useTRPC } from "@/trpc/client";
 
 
 const poppins = Poppins ({
@@ -32,15 +33,17 @@ const poppins = Poppins ({
 });
 
 export const SignInView = () => {
-
     const router = useRouter();
 
+
     const trpc = useTRPC();
-    const login = useMutation(trpc.auth.logIn.mutationOptions({
+    const queryClient = useQueryClient();
+    const login = useMutation(trpc.auth.login.mutationOptions({
         onError: (error) => {
             toast.error(error.message);
         },
-        onSuccess:() => {
+        onSuccess: async() => {
+            await queryClient.invalidateQueries(trpc.auth.session.queryFilter()); 
             router.push("/");
         },
     }));

@@ -1,9 +1,9 @@
 import { TRPCError } from "@trpc/server";
-import { headers as getHeaders, cookies as getCookies} from "next/headers";
+import { headers as getHeaders} from "next/headers";
 
 import { baseProcedure, createTRPCRouter } from "@/trpc/init";
 
-import { AUTH_COOKIE } from "../constants";
+import { generateAuthCookie } from "../utils";
 import { loginSchema, registerSchema } from "../schemas";
 
 
@@ -18,10 +18,7 @@ export const authRounter= createTRPCRouter ({
 
         return session;
     }),
-    logout: baseProcedure.mutation(async () => {
-        const cookies = await getCookies();
-        cookies.delete(AUTH_COOKIE); 
-    }),
+
     register: baseProcedure
         .input(registerSchema)
         .mutation(async({ input,ctx }) => {
@@ -67,18 +64,13 @@ export const authRounter= createTRPCRouter ({
                 });
             }
 
-            const cookies =await getCookies();
-            cookies.set({
-                name: AUTH_COOKIE,
-                value: data.token,
-                httpOnly: true,
-                path:"/",
-                // TODO: Ensure cross-domain cookie sharing
-                // sameSite:"none",
-                // domain:""
-            });
+            await generateAuthCookie({
+                prefix: ctx.db.config.cookiePrefix,
+                value: data.token 
+            })
         }),
-        logIn: baseProcedure
+        
+        login: baseProcedure
         .input(loginSchema)
         .mutation(async({ input,ctx }) => {
             const data = await ctx.db.login({
@@ -96,16 +88,10 @@ export const authRounter= createTRPCRouter ({
                 });
             }
 
-            const cookies =await getCookies();
-            cookies.set({
-                name: AUTH_COOKIE,
-                value: data.token,
-                httpOnly: true,
-                path:"/",
-                // TODO: Ensure cross-domain cookie sharing
-                // sameSite:"none",
-                // domain:""
-            });
+            await generateAuthCookie({
+                prefix: ctx.db.config.cookiePrefix,
+                value: data.token 
+            })
 
             return data;
         }),
