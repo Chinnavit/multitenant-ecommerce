@@ -8,7 +8,7 @@ import { loginSchema, registerSchema } from "../schemas";
 
 
 
-export const authRounter= createTRPCRouter ({
+export const authRouter= createTRPCRouter ({
     session: baseProcedure.query(async ({ ctx }) => {
         const headers = await getHeaders();
 

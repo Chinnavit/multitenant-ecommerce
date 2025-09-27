@@ -15,7 +15,7 @@ export const formatAsCurrency =(value: string) => {
 
     const parts = numericValue.split(".");
     const formattedValue =
-        parts[0] + (parts.length > 1 ? "." + parts[1]?.slice(0, 2):"");
+        parts[0] + (parts.length > 1 ? "." + parts[1]?.slice(0, 2) : "");
 
     if (!formattedValue) return "";
 
