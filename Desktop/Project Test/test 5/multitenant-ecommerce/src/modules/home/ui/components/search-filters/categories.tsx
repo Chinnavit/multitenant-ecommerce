@@ -102,9 +102,9 @@ export const Categories = ({ data }: Props) => {
                 {data.slice(0, visibleCount).map((category) => (
                     <div key={category.id}>
                         <CategoryDropdown
-                        category={category}
-                        isActive={activeCategory === category.slug}
-                        isNavigationHovered={isAnyHovered}
+                            category={category}
+                            isActive={activeCategory === category.slug}
+                            isNavigationHovered={isAnyHovered}
                     />
                 </div>
             ))}

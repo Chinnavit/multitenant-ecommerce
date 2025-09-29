@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { CategoriesGetManyOutput } from "@/modules/categories/type";
 
 import { SubcategoryMenu } from "./subcategory-menu"
-import { useDropdownPosition } from "./use-dropdown-position";
+;
 import Link from "next/link";
  
 
@@ -26,7 +26,7 @@ export const CategoryDropdown = ({
 }: Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-    const { getDropdownPosition } = useDropdownPosition(dropdownRef);
+   
 
     const onMuseEnter = () => {
         console.log("hello")
@@ -36,8 +36,6 @@ export const CategoryDropdown = ({
     };
 
     const onMouseLeave = () => setIsOpen(false);
-    
-    const dropdownPosition = getDropdownPosition();
     
     // TODO: Potential improve mobile 
     //const toggleDropdown = () => {
@@ -83,7 +81,6 @@ export const CategoryDropdown = ({
             <SubcategoryMenu
                 category={category}
                 isOpen={isOpen}
-                position={dropdownPosition}
             />
         </div>
     );
