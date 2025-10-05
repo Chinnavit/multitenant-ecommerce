@@ -2,7 +2,7 @@ import type { CollectionConfig } from "payload";
 
 export const Products: CollectionConfig ={
     slug: "products",
-    fields:[
+    fields: [
         {
             name: "name",
             type: "text",
@@ -35,6 +35,11 @@ export const Products: CollectionConfig ={
         },
         {
             name: "image",
+            type: "upload",
+            relationTo: "media",
+        },
+        {
+            name: "cover",
             type: "upload",
             relationTo: "media",
         },
