@@ -16,7 +16,7 @@ function Progress({
       className={cn(
         "relative h-3 w-full overflow-hidden rounded-full",
         // Modified classes
-        "borde bg-transparent",
+        "borde bg-white",
         className
       )}
       {...props}
@@ -26,7 +26,7 @@ function Progress({
         className="bg-pink-400 h-full w-full flex-1 transition-all"
         style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
       />
-    </ProgressPrimitive.Root>
+    </ProgressPrimitive.Root> 
   )
 }
 
