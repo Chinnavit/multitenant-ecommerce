@@ -1,4 +1,4 @@
-import z from "zod";
+import z  from "zod";
 import type { Sort, Where } from "payload";
 
 import { DEFAULT_LIMIT } from "@/constants";
