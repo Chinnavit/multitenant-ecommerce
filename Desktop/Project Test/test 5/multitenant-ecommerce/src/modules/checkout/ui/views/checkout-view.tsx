@@ -24,7 +24,6 @@ export const CheckoutView = ({ tenantSlug }: CheckoutViewProps) => {
     const [states, setStates] = useCheckoutStates();
     const { productIds, removeProduct, clearCart} = useCart(tenantSlug);
 
-
     const trpc = useTRPC();
     const { data, error, isLoading } = useQuery(trpc.checkout.getProducts.queryOptions({
         ids: productIds,
@@ -42,25 +41,25 @@ export const CheckoutView = ({ tenantSlug }: CheckoutViewProps) => {
                 // TODO:Modify when subdomains enabled
                 router.push("/sign-in");
             }
-            
             toast.error(error.message);
         },
     }));
     useEffect(() => {
+
         if (states.success){
             setStates({ success: false,  cancal: false });
-            clearCart(tenantSlug);
+            clearCart();
             //TODO: Invalidate library
             router.push("/products");
         }
-    }, [states.success, clearCart, router, setStates, tenantSlug]);
+    }, [states.success, clearCart, router, setStates]);
 
     useEffect(() => {
         if (error?.data?.code === "NOT_FOUND") {
-            clearCart(tenantSlug);
+            clearCart();
             toast.warning("Invalid product found, Cart cleared");
         }
-    }, [error, clearCart, tenantSlug]);
+    }, [error, clearCart]);
 
     if (isLoading) {
     return (

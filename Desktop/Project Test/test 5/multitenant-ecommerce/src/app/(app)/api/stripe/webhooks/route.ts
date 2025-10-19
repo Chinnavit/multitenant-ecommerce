@@ -44,7 +44,7 @@ export async function POST(req: Request) {
 
         try {
             switch (event.type) {
-                case"checkout.session.completed":
+                case "checkout.session.completed": {
                     data = event.data.object as Stripe.Checkout.Session;
 
                     if (!data.metadata?.userId) {
@@ -76,10 +76,10 @@ export async function POST(req: Request) {
                      
                     const lineItems = expandedSession.line_items.data as ExpandLineItem[];
 
-                    for (const item of lineItems){
+                    for (const item of lineItems) {
                         await payload.create({
                             collection: "orders",
-                            data:{
+                            data: {
                                 stripeCheckoutSessionId: data.id,
                                 user: user.id,
                                 product: item.price.product.metadata.id,
@@ -88,7 +88,8 @@ export async function POST(req: Request) {
                         });
                     }
                     break;
-                    default:
+                }
+                default:
                     throw new Error(`Unhandled event: ${event.type}`);
                 }
         } catch (error) {
