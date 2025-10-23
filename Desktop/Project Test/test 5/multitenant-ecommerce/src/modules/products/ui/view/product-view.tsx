@@ -53,17 +53,12 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
             <div className="border-y flex">
               <div className="px-6 py-4 flex items-center justify-center border-r">
                 <div className="px-2 py-1 border bg-pink-400 w-fit">
-                  <p className="text-base font-medium">
-                    {formatCurrency(data.price)}
-                  </p>
+                  <p className="text-base font-medium">{formatCurrency(data.price)}</p>
                 </div>
               </div>
 
               <div className="px-6 py-4 flex items-center justify-center lg:border-r">
-                <Link
-                  href={generateTenantURL(tenantSlug)}
-                  className="flex items-center gap-2"
-                >
+                <Link href={generateTenantURL(tenantSlug)} className="flex items-center gap-2">
                   {data.tenant.image?.url && (
                     <Image
                       src={data.tenant.image.url}
@@ -81,7 +76,10 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
 
               <div className="hidden lg:flex px-6 py-4 items-center justify-center">
                 <div className="flex items-center gap-1">
-                  <StarRating rating={3} iconClassName="size-4" />
+                  <StarRating 
+                    rating={3} 
+                    iconClassName="size-4" 
+                />
                 </div>
               </div>
             </div>
@@ -109,6 +107,7 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
               <div className="flex flex-col gap-4 p-6 border-b">
                 <div className="flex flex-row items-center gap-2">
                   <CartButton
+                    isPurchased={data.isPurchased}
                     productId={productId}
                     tenantSlug={tenantSlug}
                   />
@@ -147,7 +146,7 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
                         className="h-[1lh]" 
                         />
                         <div className="font-medium">
-                            {5}%
+                            {25}%
                         </div>
                     </Fragment>
                   ))}

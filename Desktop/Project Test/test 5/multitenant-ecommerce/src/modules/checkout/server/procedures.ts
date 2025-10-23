@@ -7,7 +7,7 @@ import { stripe } from "@/lib/stripe";
 import { Media, Tenant } from "@/payload-types";
 import { baseProcedure, createTRPCRouter, protectedProcedure } from "@/trpc/init";
 
-import { CheckoutMetadata, ProductsMetadata } from "../types";
+import { CheckoutMetadata, ProductMetadata,  } from "../types";
 
 export const checkoutRouter = createTRPCRouter ({
     purchase: protectedProcedure
@@ -17,7 +17,7 @@ export const checkoutRouter = createTRPCRouter ({
                 tenantSlug: z.string().min(1),
             })
         )
-        .mutation( async ({ ctx, input}) => {
+        .mutation(async ({ ctx, input}) => {
             const products = await ctx.db.find({
                 collection: "products",
                 depth: 2,
@@ -67,8 +67,8 @@ export const checkoutRouter = createTRPCRouter ({
                 products.docs.map((product) => ({ 
                     quantity: 1,
                     price_data: {
-                        unit_amount: product.price * 100,// Stripe handles prices in cents 
-                        currency:"THB",
+                        unit_amount: product.price * 100, // Stripe handles prices in cents 
+                        currency:"thb",
                         product_data:{
                             name: product.name,
                             metadata: {
@@ -76,7 +76,7 @@ export const checkoutRouter = createTRPCRouter ({
                                 id: product.id,
                                 name: product.name,
                                 price: product.price,
-                            } as ProductsMetadata
+                            } as unknown as ProductMetadata
                         }
                     }
                 }));
