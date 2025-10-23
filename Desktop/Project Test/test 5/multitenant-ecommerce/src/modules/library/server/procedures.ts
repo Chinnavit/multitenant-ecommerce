@@ -25,14 +25,15 @@ export const libraryRouter = createTRPCRouter ({
         },
     });
 
-    const protectIds = orderdata.docs.map((order) => order.product);
+    const productIds = orderdata.docs.map((order) => order.product);
 
     const productData = await ctx.db.find({
         collection: "products",
-        pagination: false,
+        page: input.cursor,  
+        limit: input.limit,
         where:{
             id: {
-                in:protectIds,
+                in: productIds,
             },
         },
     });
