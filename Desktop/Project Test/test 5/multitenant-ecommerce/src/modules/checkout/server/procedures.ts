@@ -7,7 +7,7 @@ import { stripe } from "@/lib/stripe";
 import { Media, Tenant } from "@/payload-types";
 import { baseProcedure, createTRPCRouter, protectedProcedure } from "@/trpc/init";
 
-import { CheckoutMetadata, ProductMetadata,  } from "../types";
+import { CheckoutMetadata, ProductMetadata  } from "../types";
 
 export const checkoutRouter = createTRPCRouter ({
     purchase: protectedProcedure
@@ -69,14 +69,14 @@ export const checkoutRouter = createTRPCRouter ({
                     price_data: {
                         unit_amount: product.price * 100, // Stripe handles prices in cents 
                         currency:"thb",
-                        product_data:{
+                        product_data: {
                             name: product.name,
                             metadata: {
                                 stripeAccountId: tenant.stripeAccountId,
                                 id: product.id,
                                 name: product.name,
                                 price: product.price,
-                            } as unknown as ProductMetadata
+                            } as ProductMetadata
                         }
                     }
                 }));
@@ -92,7 +92,7 @@ export const checkoutRouter = createTRPCRouter ({
                 },
                 metadata: {
                     userId: ctx.session.user.id,
-                } as CheckoutMetadata
+                }   as CheckoutMetadata
             });
 
             if (!checkout.url) {
