@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { useTRPC } from "@/trpc/client";
 
-import { ReviewFrom } from "./review-form";
+import { ReviewForm } from "./review-form";
 
 interface Props {
     productId:string;
@@ -15,9 +15,9 @@ export const ReviewSidebar = ({ productId }: Props) => {
     }));
 
     return (
-        <ReviewFrom
-            productId={productId}
-            initialData={data}
+        <ReviewForm
+             productId={productId}
+             initialData={data}
         />
     );
 };

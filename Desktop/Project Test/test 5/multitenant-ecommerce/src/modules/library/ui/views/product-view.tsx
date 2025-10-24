@@ -1,4 +1,4 @@
-"use clinet";
+"use client";
 
 import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
@@ -33,15 +33,14 @@ export const ProductView = ({ productId }: Props) => {
             </div>
         </header>
         <section className="max-w-[var(--breakpoint-xl)] mx-auto px-4 lg:px-12 py-10">
-            <div className="grid grid-col-1 lg:grid-cols-7 gap-4 lg:gap-16">
-                
+            <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 lg:gap-16">
                 <div className="lg:col-span-2">
                     <div className="p-4 bg-white rounded-md border gap-4 ">
                         <ReviewSidebar productId={productId} />
                     </div>
                 </div>
-
-                <div className="lg-col-span-5">
+                
+                <div className="lg:col-span-5">
                     <p className="font-medium italic text-muted-foreground">
                         No special content
                     </p>
