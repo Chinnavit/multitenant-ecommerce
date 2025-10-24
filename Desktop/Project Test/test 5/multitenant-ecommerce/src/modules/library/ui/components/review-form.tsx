@@ -30,7 +30,7 @@ const formSchema = z.object({
     description: z.string().min(1, { message:"Description is required"}),
 });
 
-export const ReviewFrom = ({ productId, initialData }: Props) => {
+export const ReviewForm = ({ productId, initialData }: Props) => {
     const [isPreview, setIsPreview] = useState(!!initialData);
 
     const trpc = useTRPC();
