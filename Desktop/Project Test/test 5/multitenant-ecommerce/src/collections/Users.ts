@@ -21,14 +21,12 @@ const defaultTenantArrayField = tenantsArrayField({
 export const Users: CollectionConfig = {
   slug: 'users',
   access: {
-    read: () => true,
+    // Super-admins can read all; others only their own doc
+    read: ({ req }) => (isSuperAdmin(req.user) ? true : { id: { equals: req.user?.id } }),
     create: ({ req }) => isSuperAdmin(req.user),
     delete: ({ req }) => isSuperAdmin(req.user),
-    update: ({ req, id }) => {
-      if (isSuperAdmin(req.user)) return true;
-
-      return req.user?.id === id;
-    }
+    // Same pattern for update; avoids string/number id mismatches
+    update: ({ req }) => (isSuperAdmin(req.user) ? true : { id: { equals: req.user?.id } }),
   },
   admin: {
     useAsTitle: 'email',

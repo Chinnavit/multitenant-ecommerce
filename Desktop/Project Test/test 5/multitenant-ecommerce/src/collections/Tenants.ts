@@ -17,10 +17,9 @@ export const Tenants: CollectionConfig = {
       required: true,
       type: "text",
       label: "StoreName",
-      admin:
-        {
+      admin: {
             description:"This is the name of the store (e.g. Chinavit's Shop)",
-        }
+        },
     },
     {
         name: "slug",
@@ -34,7 +33,7 @@ export const Tenants: CollectionConfig = {
         admin: 
         {
             description:"This is the subdomain of the store (e.g. [slug].Central Art.com)",
-        }
+        },
     },
     {
         name: "image",
@@ -49,7 +48,7 @@ export const Tenants: CollectionConfig = {
             update: ({ req }) => isSuperAdmin(req.user),
         },
         admin:{
-            description: "Stripe Account ID asscoiated with your shop",
+            description: "Stripe Account ID associated with your shop",
         },
     },
     {
