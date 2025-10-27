@@ -277,7 +277,7 @@ export interface Product {
     [k: string]: unknown;
   } | null;
   /**
-   * If checked, this product wiill not be shown on the public storefront
+   * If checked, this product will not be shown on the public storefront
    */
   isPrivate?: boolean | null;
   /**
