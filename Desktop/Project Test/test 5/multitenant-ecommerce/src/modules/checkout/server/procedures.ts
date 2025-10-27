@@ -49,7 +49,7 @@ export const checkoutRouter = createTRPCRouter ({
             if (!accountLink.url) {
                 throw new TRPCError({
                     code: "BAD_REQUEST",
-                    message: "Failed to create varification link",
+                    message: "Failed to create verification link",
                 });
             }
 
@@ -77,6 +77,11 @@ export const checkoutRouter = createTRPCRouter ({
                             "tenant.slug": {
                                 equals: input.tenantSlug
                             }
+                        },
+                        {
+                            isArchived: {
+                                not_equals: true,
+                            },
                         }
                     ]
                 }
@@ -178,9 +183,18 @@ export const checkoutRouter = createTRPCRouter ({
             collection: "products",
             depth: 2, // Populate "categories", "image", "tennant" & "tenant.image"
             where: {
-                id:{
-                    in: input.ids,
-                },
+                and: [
+                    {
+                    id: {
+                        in: input.ids,
+                    },
+                    },
+                    {
+                        isArchived: {
+                            not_equals: true,
+                        },
+                    },
+                ],
             },
         });
 

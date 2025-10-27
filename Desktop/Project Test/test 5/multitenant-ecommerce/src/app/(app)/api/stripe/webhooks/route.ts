@@ -104,7 +104,7 @@ export async function POST(req: Request) {
                                 },
                             },
                             data: {
-                                stripeDetailsSubmitted: data.details_submitted,
+                                stripeDetailsSubmitted: data.details_submitted ?? false,
                             },
                         });
 

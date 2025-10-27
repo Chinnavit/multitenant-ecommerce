@@ -66,15 +66,22 @@ const categories = [
 const seed = async () => {
     const payload = await getPayload({ config });
 
-    const adminAccount = await stripe.accounts.create({});
+    let adminAccount;
+    try {
+      adminAccount = await stripe.accounts.create({});
+    } catch (error) {
+      console.error('Failed to create Stripe account:', error);
+      throw new Error('Stripe account creation failed during seeding');
+    }
 
     // Create admin tenant
     const adminTenant = await payload.create({
       collection: "tenants",
-      data: { 
+      data: {
         name: "admin",
         slug: "admin",
         stripeAccountId: adminAccount.id,
+, 
       },
     });
 
